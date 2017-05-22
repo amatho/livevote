@@ -1,0 +1,25 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "not ie 10"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    ["transform-react-jsx", { "pragma": "h" }],
+    ["transform-class-properties"]
+  ],
+  "env": {
+    "production": {
+      "presets": ["babili"]
+    }
+  }
+}

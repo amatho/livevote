@@ -1,0 +1,56 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  margin: 12px 20px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  z-index: 999;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s;
+
+  @media (max-width: 599px) {
+    margin: 8px;
+  }
+}
+
+.active {
+  transform: none;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 0 0 0 8px;
+  margin: 0;
+  border: none;
+  background: none;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.spacer {
+  display: inline-block;
+  width: 2px;
+  margin: 0 8px;
+  background-color: #eeeeee;
+}
+
+.input {
+  font-size: 1.25rem;
+  padding: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+
+  &:focus {
+    outline: 0;
+  }
+}
