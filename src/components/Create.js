@@ -64,6 +64,18 @@ export default class extends Component {
       options
     });
 
+    evt.target.elements.name.value = '';
+    evt.target.elements.desc.value = '';
+
+    optionElements.forEach(option => {
+      const input = option.querySelector('.mdc-textfield .mdc-textfield__input');
+      input.value = '';
+    });
+
+    this.setState({
+      options: 2
+    });
+
     route('/');
   }
 
