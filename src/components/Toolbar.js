@@ -48,9 +48,16 @@ export default class extends Component {
     return this.state.title ? this.state.title : '';
   }
 
-  render = (props, state) => {
+  componentDidMount = () => {
+    this.setState({});
+  }
+
+  render = ({toolbarRef}, state) => {
     return (
-      <header class="mdc-toolbar">
+      <header
+        class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall"
+        ref={toolbarRef}
+      >
         <Match path="/">
           {({matches, url, path}) => {
             if (matches) {

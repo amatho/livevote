@@ -31,9 +31,23 @@ function setAtPath(path, val) {
   db.ref(path).set(val);
 }
 
+function searchAtPathOnce(path, event, child, query, cb) {
+  db.ref(path)
+    .orderByChild(child)
+    .startAt(query)
+    .endAt(`${query}\uf8ff`)
+    .once(event, cb)
+}
+
+function pushAtPath(path, obj) {
+  db.ref(path).push(obj);
+}
+
 export {
   readAtPath,
   readAtPathOnce,
   transactionAtPath,
-  setAtPath
+  setAtPath,
+  searchAtPathOnce,
+  pushAtPath
 };

@@ -1,0 +1,30 @@
+.card {
+  margin: 16px 0;
+  background-color: #ffffff;
+}
+
+.textfield {
+  margin: 16px 0;
+}
+
+.input {
+  width: 100%;
+
+  input, textarea {
+    width: 100%;
+  }
+}
+
+.spacer {
+  margin: 24px 0;
+}
+
+.button-container {
+  display: inline-flex;
+  flex-direction: column-reverse;
+}
+
+.button {
+  display: block !important;
+  margin-bottom: 16px;
+}

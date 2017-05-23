@@ -31,6 +31,7 @@ export default class extends Component {
     window.addEventListener('hashchange', () => {
       window.setTimeout(() => this.mdcDrawer.open = false, 250);
     });
+    this.setState({});
   }
 
   render = (props, state) => {
