@@ -1,0 +1,40 @@
+{
+  "polls" : {
+    "kjnwakdjnkj" : {
+      "desc" : "Just a poll.",
+      "name" : "What's the best food?",
+      "options" : {
+        "Fajitas" : 4,
+        "Pizza" : 4,
+        "Taco" : 3
+      }
+    },
+    "klamwdlkmawdl" : {
+      "desc" : "Just another poll.",
+      "name" : "The Second Poll",
+      "options" : {
+        "A" : 40,
+        "B" : 110,
+        "C" : 270
+      }
+    },
+    "johodetteernoe": {
+      "desc": "This is the third poll.",
+      "name": "Beste Sjokolade",
+      "options": {
+        "Nidar": 1,
+        "Freia": 1,
+        "First Price": 1
+      }
+    },
+    "endaenpollellernoe": {
+      "desc": "Here comes the fourth poll.",
+      "name": "Choose Your Johnny",
+      "options": {
+        "Johnny Depp": 1,
+        "Johnny Bravo": 1,
+        "Johnny Cash": 1
+      }
+    }
+  }
+}
