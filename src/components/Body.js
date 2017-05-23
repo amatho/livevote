@@ -5,13 +5,6 @@ import {toolbar} from 'material-components-web';
 import styles from 'styles/body.scss';
 
 export default class extends Component {
-  getLinks = () => {
-    return [
-      ['', 'Explore'],
-      ['create', 'Create']
-    ];
-  }
-
   componentDidMount = () => {
     this.toolbar = toolbar.MDCToolbar.attachTo(this.toolbarRef);
     this.toolbar.fixedAdjustElement = this.main;
@@ -21,7 +14,7 @@ export default class extends Component {
     return (
       <div class={`${styles.body} mdc-typography`}>
         <Toolbar toolbarRef={toolbar => this.toolbarRef = toolbar} />
-        <Drawer title="Live Vote" links={this.getLinks()} />
+        <Drawer title="Live Vote" />
         <main
           class={`${styles.main} mdc-toolbar-fixed-adjust`}
           ref={main => this.main = main}
