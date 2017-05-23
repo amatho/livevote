@@ -7,24 +7,6 @@ export default class extends Component {
     return title ? title : '';
   }
 
-  getLinkArray = (links) => {
-    if (links) {
-      return links.map(link => {
-        return (
-          <Link
-            class="mdc-list-item"
-            activeClassName="mdc-temporary-drawer--selected"
-            href={`/${link[0]}`}
-          >
-            {link[1]}
-          </Link>
-        );
-      });
-    }
-
-    return [];
-  }
-
   componentDidMount = () => {
     this.mdcDrawer = new drawer.MDCTemporaryDrawer(this.aside);
     document.getElementById('menu').addEventListener('click', () => this.mdcDrawer.open = true);
@@ -47,22 +29,34 @@ export default class extends Component {
               {this.getTitle(props.title)}
             </div>
           </header>
-          <nav class="mdc-temporary-drawer__content mdc-list">
-            <Link
-              class="mdc-list-item"
-              activeClassName="mdc-temporary-drawer--selected"
-              href="/"
-            >
-              <i class="material-icons mdc-list-item__start-detail">explore</i>Explore
-            </Link>
-            <Link
-              class="mdc-list-item"
-              activeClassName="mdc-temporary-drawer--selected"
-              href="/create"
-            >
-              <i class="material-icons mdc-list-item__start-detail">create</i>Create
-            </Link>
-          </nav>
+           <div class="mdc-temporary-drawer__content mdc-list-group">
+            <nav class="mdc-list">
+              <Link
+                class="mdc-list-item"
+                activeClassName="mdc-temporary-drawer--selected"
+                href="/"
+              >
+                <i class="material-icons mdc-list-item__start-detail">explore</i>Explore
+              </Link>
+              <Link
+                class="mdc-list-item"
+                activeClassName="mdc-temporary-drawer--selected"
+                href="/create"
+              >
+                <i class="material-icons mdc-list-item__start-detail">create</i>Create
+              </Link>
+            </nav>
+            <hr class="mdc-list-divider" />
+            <nav class="mdc-list">
+              <a
+                class="mdc-list-item"
+                href="https://github.com/amatho/livevote"
+                target="_blank"
+              >
+                <i class="material-icons mdc-list-item__start-detail">code</i>View Source Code
+              </a>
+            </nav>
+          </div>
         </nav>
       </aside>
     );
