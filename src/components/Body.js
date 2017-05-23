@@ -14,8 +14,8 @@ export default class extends Component {
   render = () => {
     return (
       <div class={`${styles.body} mdc-typography`}>
-        <Toolbar title="Live Vote" />
-        <Drawer title="Live Vote" links={this.getLinks()} active={this.props.active} />
+        <Toolbar />
+        <Drawer title="Live Vote" links={this.getLinks()} />
         <main class={styles.main}>
           {this.props.children}
         </main>
