@@ -27,7 +27,6 @@ export default class extends Component {
 
   componentDidMount = () => {
     this.mdcDrawer = new drawer.MDCTemporaryDrawer(this.aside);
-    window.mdcDrawer = this.mdcDrawer; // Remove later
     document.getElementById('menu').addEventListener('click', () => this.mdcDrawer.open = true);
     window.addEventListener('hashchange', () => {
       window.setTimeout(() => this.mdcDrawer.open = false, 250);
