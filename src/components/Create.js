@@ -130,7 +130,7 @@ export default class extends Component {
                 Submit
               </button>
               <button
-                class={`${styles.button} mdc-button mdc-button--raised mdc-button--primary`}
+                class={`${styles.button} mdc-button mdc-button--raised`}
                 onClick={this.addOption}
               >
                 Add an option
