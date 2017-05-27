@@ -10,6 +10,8 @@ export default class extends Component {
   }
 
   onSubmit = evt => {
+    evt.preventDefault();
+
     const pollOptions = document.getElementById('viewPollOptions').querySelectorAll('.mdc-radio input');
     pollOptions.forEach(option => {
       if (option.checked) {
@@ -18,8 +20,36 @@ export default class extends Component {
         readAtPathOnce(votePath, 'value', snapshot => {
           setAtPath(votePath, snapshot.val() + 1);
         });
+
+        this.afterVoted();
       }
     });
+  }
+
+  afterVoted = () => {
+    const formRect = this.form.getBoundingClientRect();
+    const totalHeight = formRect.height;
+
+    this.form.style.transition = 'opacity 250ms';
+    this.form.style.opacity = '0';
+
+    window.setTimeout(() => {
+      this.form.style.display = 'none';
+      this.chartDiv.style.transform = `translateY(${totalHeight}px)`;
+    }, 250);
+
+    window.setTimeout(() => {
+      this.chartDiv.style.transition = 'transform 250ms';
+      this.chartDiv.style.transform = '';
+    }, 350);
+
+    window.setTimeout(() => {
+      localStorage.setItem(`LiveVote_hasVoted_${this.id}`, 'true');
+      this.hasVoted = true;
+      this.setState({
+        form: null
+      });
+    }, 250);
   }
 
   getOptionsDOM = options => {
@@ -44,27 +74,62 @@ export default class extends Component {
     }
   }
 
+  getForm = options => {
+    if (!this.hasVoted) {
+      return (
+        <form
+          action="javascript:void(0)"
+          onSubmit={this.onSubmit}
+          ref={form => this.form = form}
+        >
+          <div id="viewPollOptions">
+            {this.getOptionsDOM(options)}
+          </div>
+          <button
+            class={`${styles.submit} mdc-button mdc-button--raised mdc-button--accent`}
+            type="submit"
+            ref={btn => this.submitButton = btn}
+          >
+            Vote
+          </button>
+        </form>
+      );
+    }
+
+    return null;
+  }
+
   componentDidMount = () => {
+    window.scrollTo(0, 0);
+
     readAtPath(`/polls/${this.id}`, 'value', snapshot => {
       const value = snapshot.val();
       this.setState({
         name: value.name,
         desc: value.desc,
-        options: value.options
+        options: value.options,
+        form: this.getForm(value.options)
       });
     });
-
-    const interval = window.setInterval(() => {
-      const pos = getComputedStyle(this.submitButton).position;
-      if (pos === 'relative') {
-        ripple.MDCRipple.attachTo(this.submitButton);
-        window.clearInterval(interval);
-      }
-    }, 250);
   }
 
-  render = ({pollId}, {name, desc, options}) => {
-    if (!this.id) this.id = pollId;
+  componentDidUpdate = () => {
+    if (!this.hasVoted) {
+      const interval = window.setInterval(() => {
+        const pos = getComputedStyle(this.submitButton).position;
+        if (pos === 'relative') {
+          ripple.MDCRipple.attachTo(this.submitButton);
+          window.clearInterval(interval);
+        }
+      }, 250);
+    }
+  }
+
+  render = ({pollId}, {name, desc, options, form}) => {
+    if (this.id !== pollId) {
+      this.id = pollId;
+      this.hasVoted = localStorage.getItem(`LiveVote_hasVoted_${this.id}`) ? true : false;
+    }
 
     return (
       <div>
@@ -73,19 +138,11 @@ export default class extends Component {
             <h1 class="mdc-card__title mdc-card__title--large">{name}</h1>
           </section>
           <section class="mdc-card__supporting-text">
-            <form action="javascript:void(0)" onSubmit={this.onSubmit}>
-              <div id="viewPollOptions">
-                {this.getOptionsDOM(options)}
-              </div>
-              <button
-                class={`${styles.submit} mdc-button mdc-button--raised mdc-button--accent`}
-                type="submit"
-                ref={btn => this.submitButton = btn}
-              >
-                Vote
-              </button>
-            </form>
-            <div>
+            {form}
+            <div
+              class={styles.chartArea}
+              ref={chartDiv => this.chartDiv = chartDiv}
+            >
               <PollChart options={options} />
             </div>
           </section>
