@@ -1,6 +1,7 @@
 import {h, Component} from 'preact';
 import Drawer from 'components/Drawer';
 import Toolbar from 'components/Toolbar';
+import Footer from 'components/Footer';
 import {toolbar} from 'material-components-web';
 import styles from 'styles/body.scss';
 
@@ -21,6 +22,7 @@ export default class extends Component {
         >
           {this.props.children}
         </main>
+        <Footer />
       </div>
     );
   }

@@ -114,7 +114,7 @@ export default class extends Component {
   }
 
   componentDidUpdate = () => {
-    if (!this.hasVoted) {
+    if (this.form) {
       const interval = window.setInterval(() => {
         const pos = getComputedStyle(this.submitButton).position;
         if (pos === 'relative') {
