@@ -9,7 +9,7 @@ export default class extends Component {
   }
 
   getMenuStyles = () => {
-    if (this.state.type === 'viewPoll') {
+    if (this.state.type === 'viewPoll' || this.state.type === 'welcome') {
       return {
         display: 'none'
       };
@@ -33,7 +33,7 @@ export default class extends Component {
   }
 
   getSearchStyles = () => {
-    if (this.state.type === 'create' || this.state.type === 'viewPoll') {
+    if (this.state.type === 'create' || this.state.type === 'viewPoll' || this.state.type === 'welcome') {
       return {
         display: 'none'
       };
@@ -42,6 +42,16 @@ export default class extends Component {
     return {
       display: 'inline-block'
     };
+  }
+
+  getHeaderStyles = () => {
+    if (this.state.type === 'none') {
+      return {
+        //display: 'none'
+      };
+    }
+
+    return {};
   }
 
   getTitle = () => {
@@ -57,6 +67,7 @@ export default class extends Component {
       <header
         class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall"
         ref={toolbarRef}
+        style={this.getHeaderStyles()}
       >
         <Match path="/">
           {({matches, url, path}) => {
@@ -84,6 +95,16 @@ export default class extends Component {
               this.setState({
                 type: 'viewPoll',
                 title: 'View Poll'
+              });
+            }
+          }}
+        </Match>
+        <Match path="/welcome">
+          {({matches, url, path}) => {
+            if (matches) {
+              this.setState({
+                type: 'welcome',
+                title: 'Live Vote'
               });
             }
           }}
