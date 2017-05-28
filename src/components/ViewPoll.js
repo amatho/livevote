@@ -32,6 +32,7 @@ export default class extends Component {
 
     this.form.style.transition = 'opacity 250ms';
     this.form.style.opacity = '0';
+    this.chartDiv.style.transition = '';
 
     window.setTimeout(() => {
       this.form.style.display = 'none';
@@ -116,6 +117,7 @@ export default class extends Component {
   componentDidUpdate = () => {
     if (this.form) {
       const interval = window.setInterval(() => {
+        if (this.hasVoted) window.clearInterval(interval);
         const pos = getComputedStyle(this.submitButton).position;
         if (pos === 'relative') {
           ripple.MDCRipple.attachTo(this.submitButton);
