@@ -29,7 +29,7 @@ export default class extends Component {
             }
           }}
         </Match>
-        Developed by Amandus Thorsrud.
+        <i class="material-icons">code</i> with <i class="material-icons">favorite</i> by Amandus Thorsrud.
       </footer>
     );
   }
